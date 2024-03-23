@@ -1,0 +1,30 @@
+{
+  "Header": {
+    "Name": "Datos compactos BIE",
+    "Email": "atencion.usuarios@inegi.org.mx"
+  },
+  "Series": [
+    {
+      "INDICADOR": "628208",
+      "FREQ": "8",
+      "TOPIC": "100005000015002001000035",
+      "UNIT": "60",
+      "UNIT_MULT": null,
+      "NOTE": "",
+      "SOURCE": "127",
+      "LASTUPDATE": "07/03/2024 01:45:21 p. m.",
+      "STATUS": null,
+      "OBSERVATIONS": [
+        {
+          "TIME_PERIOD": "2024/02",
+          "OBS_VALUE": "4.4",
+          "OBS_EXCEPTION": "",
+          "OBS_STATUS": "",
+          "OBS_SOURCE": "127",
+          "OBS_NOTE": null,
+          "COBER_GEO": "00"
+        }
+      ]
+    }
+  ]
+}

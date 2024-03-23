@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: inegi-service
+
+inegi:
+  token: ${TOKEN}
