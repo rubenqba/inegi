@@ -9,7 +9,6 @@
   </parent>
 
   <artifactId>inegi-api</artifactId>
-  <version>${project.parent.version}</version>
 
   <name>inegi-api</name>
   <description>inegi-api</description>
