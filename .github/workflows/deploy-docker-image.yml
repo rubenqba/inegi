@@ -22,13 +22,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      #      - name: Login to DockerHub
-      #        uses: docker/login-action@v1
-      #        with:
-      #          username: ${{ secrets.DOCKERHUB_USERNAME }}
-      #          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          password: ${{ github.token }}
 
       - name: Extract tag name
         id: tag_name
@@ -42,3 +36,4 @@ jobs:
           build-args: |
             ARG1_NAME=arg1_value
             ARG2_NAME=arg2_value
+          github-token: ${{ github.token }}
