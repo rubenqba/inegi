@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           push: true
-          tags: ${{github.sha}} #${{ env.TAG_NAME }}
+          tags: gcr.io/rubenqba/inegi:${{github.sha}} #${{ env.TAG_NAME }}
           build-args: |
             ARG1_NAME=arg1_value
             ARG2_NAME=arg2_value
