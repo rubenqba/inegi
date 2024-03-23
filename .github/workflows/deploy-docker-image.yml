@@ -10,6 +10,11 @@ permissions:
   contents: read
   packages: write
 
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
@@ -18,6 +23,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
+      - name: Extract metadata for the Docker image
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          tags: |
+            type=raw,value=latest,enable={{is_default_branch}}
+            type=sha,prefix={{branch}}-,suffix=-{{date 'X'}}
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3.2.0
 
@@ -25,8 +39,8 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ github.token }}
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Extract tag name
         id: tag_name
@@ -36,8 +50,8 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           push: true
-          tags: gcr.io/rubenqba/inegi:${{github.sha}} #${{ env.TAG_NAME }}
           build-args: |
             ARG1_NAME=arg1_value
             ARG2_NAME=arg2_value
-          github-token: ${{ github.token }}
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
