@@ -18,7 +18,7 @@ jobs:
         uses: docker/setup-buildx-action@v3.2.0
 
       - name: Login to GitHub Container Registry
-        uses: docker/login-action@v1
+        uses: docker/login-action@v3
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
@@ -38,7 +38,7 @@ jobs:
         uses: docker/build-push-action@v5.3.0
         with:
           push: true
-          tags: ¢{{github.sha}} #${{ env.TAG_NAME }}
+          tags: ${{github.sha}} #${{ env.TAG_NAME }}
           build-args: |
             ARG1_NAME=arg1_value
             ARG2_NAME=arg2_value
