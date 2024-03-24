@@ -53,3 +53,10 @@ jobs:
             ARG2_NAME=arg2_value
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Call portainer webhook
+        uses: joelwmale/webhook-action@master
+        with:
+          url: ${{ secrets.PORTAINER_WEBHOOK }}
+          headers: '{"repository": "${{ github.repository }}"}'
+          body: '{"event": "deployment", "repository": "${{ github.repository }}"}'
