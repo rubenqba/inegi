@@ -12,7 +12,7 @@
   <groupId>com.rubenqba.inegi</groupId>
   <artifactId>inegi</artifactId>
   <packaging>pom</packaging>
-  <version>0.0.3-SNAPSHOT</version>
+  <version>0.0.3</version>
 
   <name>inegi</name>
   <description>inegi</description>
