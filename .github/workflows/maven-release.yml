@@ -40,5 +40,5 @@ jobs:
       - name: Set next development version
         run: |
           mvn -B versions:set -DnextSnapshot=true -DprocessAllModules=true
-          git commit -a -m "[ci-skip] Create next snapshot version"
+          git commit -a -m "[skip ci] Create next snapshot version"
           git push origin
