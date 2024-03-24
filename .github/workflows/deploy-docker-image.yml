@@ -1,15 +1,10 @@
 ---
 name: Deploy Docker Image
 
-on: push
-#  push:
-#    tags:
-#      - v.*
-
-permissions:
-  contents: read
-  packages: write
-
+on:
+  create:
+    tags:
+      - v.*
 
 env:
   REGISTRY: ghcr.io
@@ -18,6 +13,10 @@ env:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
 
     steps:
       - name: Checkout code
