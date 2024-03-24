@@ -2,9 +2,9 @@
 name: Deploy Docker Image
 
 on:
-  create:
+  push:
     tags:
-      - v.*
+      - 'v*'
 
 env:
   REGISTRY: ghcr.io
