@@ -2,8 +2,10 @@ name: Maven Release
 
 on:
   push:
+  pull_request:
     branches:
       - master
+  workflow_dispatch:
 
 jobs:
   build-verify:
@@ -11,8 +13,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.PAT }}
 
       - name: Set up JDK
         uses: actions/setup-java@v4
@@ -23,5 +23,6 @@ jobs:
           cache-dependency-path: 'pom.xml'
 
       - name: Check tests
-        run: |
-          mvn -B release:prepare release:perform --file pom.xml -DskipTests
+        run: mvn -B verify --file pom.xml
+        env:
+          INEGI_TOKEN: ${{ secrets.INEGI_TOKEN }}
