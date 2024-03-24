@@ -17,11 +17,10 @@ jobs:
       - name: Set up JDK
         uses: actions/setup-java@v4
         with:
-          java-version: '21' # Asegúrate de usar la versión que tu proyecto requiere
+          java-version: '21'
           distribution: 'temurin'
           cache: 'maven'
           cache-dependency-path: 'pom.xml'
 
       - name: Check tests
-        run: |
-          mvn -B release:prepare release:perform --file pom.xml -DskipTests
+        run: mvn -B release:prepare release:perform --file pom.xml -Darguments='-DskipTests'
