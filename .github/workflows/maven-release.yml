@@ -22,5 +22,23 @@ jobs:
           cache: 'maven'
           cache-dependency-path: 'pom.xml'
 
-      - name: Check tests
-        run: mvn -B release:prepare release:perform --file pom.xml -Darguments='-DskipTests'
+      - name: Create release tag
+        run: mvn -B versions:set -DremoveSnapshot -DprocessAllModules=true
+
+      - name: Get new version
+        id: get_version
+        run: echo "version=$(mvn -q -Dexec.executable="echo" -Dexec.args='${project.version}' --non-recursive exec:exec)" >> $GITHUB_OUTPUT
+
+      - name: Push release tag
+        run: |
+          git config --global user.name "Github Actions"
+          git config --global user.email "111847+rubenqba@users.noreply.github.com"
+          git commit -a -m "Create new version v${{ steps.get_version.outputs.version }}"
+          git tag -a v${{ steps.get_version.outputs.version }} -m 'Create release version v${{ steps.get_version.outputs.version }}'
+          git push origin v${{ steps.get_version.outputs.version }}
+
+      - name: Set next development version
+        run: |
+          mvn -B versions:set -DnextSnapshot=true -DprocessAllModules=true
+          git commit -a -m "[ci-skip] Create next snapshot version"
+          git push origin
